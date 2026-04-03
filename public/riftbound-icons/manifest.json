@@ -1,0 +1,33 @@
+{
+  "source": "Discord CDN emoji (user-provided); `rb_energy_0` from emoji id 1428374187785060464",
+  "base": "/riftbound-icons/",
+  "tokens": {
+    "rb_might": "rb_might.webp",
+    "rb_exhaust": "rb_exhaust.webp",
+    "rb_rune_body": "rb_rune_body.webp",
+    "rb_rune_calm": "rb_rune_calm.webp",
+    "rb_rune_chaos": "rb_rune_chaos.webp",
+    "rb_rune_fury": "rb_rune_fury.webp",
+    "rb_rune_mind": "rb_rune_mind.webp",
+    "rb_rune_order": "rb_rune_order.webp",
+    "rb_rune_rainbow": "rb_rune_rainbow.webp",
+    "rb_rune_unknown": "rb_rune_unknown.webp",
+    "rb_energy_0": "rb_energy_0.webp",
+    "rb_energy_1": "rb_energy_1.webp",
+    "rb_energy_2": "rb_energy_2.webp",
+    "rb_energy_3": "rb_energy_3.webp",
+    "rb_energy_4": "rb_energy_4.webp",
+    "rb_energy_5": "rb_energy_5.webp",
+    "rb_energy_6": "rb_energy_6.webp",
+    "rb_energy_7": "rb_energy_7.webp",
+    "rb_energy_8": "rb_energy_8.webp",
+    "rb_energy_9": "rb_energy_9.webp"
+  },
+  "missing_in_folder": ["rb_recycle"],
+  "extras_not_in_riftcodex_plain": {
+    "text_section_break": "text_section_break.png",
+    "icon_gear_white": "icon_gear_white.webp",
+    "icon_spell_white": "icon_spell_white.webp",
+    "icon_unit_white": "icon_unit_white.webp"
+  }
+}
