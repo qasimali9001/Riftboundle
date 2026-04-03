@@ -4,6 +4,7 @@ import { fetchAllCards } from '../lib/api/fetchCards'
 import { HINT_COST, SCORE_START, WRONG_GUESS_PENALTY } from '../lib/config'
 import {
   clearSavedGame,
+  collectUsedTargetCardIds,
   loadSavedGame,
   persistGame,
 } from '../lib/storage'
@@ -13,7 +14,10 @@ import {
   letterAppearsOnCard,
   normalizeGuess,
 } from '../lib/utils/mask'
-import { dailyIndex } from '../lib/utils/seed'
+import {
+  pickDailyCard,
+  resolveTargetCardFromSave,
+} from '../lib/utils/seed'
 
 function utcTodayYmd(): string {
   return new Date().toISOString().slice(0, 10)
@@ -52,6 +56,7 @@ function createInitialGame(target: Card): GameState {
 function payloadFromGame(game: GameState, dateYmd: string): SavedGamePayload {
   return {
     date: dateYmd,
+    targetCardId: game.targetCard.id,
     score: game.score,
     guesses: game.guesses,
     hintsUsed: game.hintsUsed,
@@ -115,13 +120,14 @@ function initGameForDate(
   cards: Card[],
   dateYmd: string,
 ): GameState {
-  const idx = dailyIndex(dateYmd, cards.length)
-  const target = cards[idx]
   const saved = loadSavedGame(dateYmd)
-  if (!saved) {
-    return createInitialGame(target)
+  if (saved) {
+    const target = resolveTargetCardFromSave(cards, dateYmd, saved)
+    return buildGameFromSave(target, saved)
   }
-  return buildGameFromSave(target, saved)
+  const used = collectUsedTargetCardIds(cards, dateYmd)
+  const target = pickDailyCard(cards, dateYmd, used)
+  return createInitialGame(target)
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
@@ -171,8 +177,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const { cards, playDate } = get()
     if (!cards?.length) return
     clearSavedGame(playDate)
-    const idx = dailyIndex(playDate, cards.length)
-    const game = createInitialGame(cards[idx])
+    const used = collectUsedTargetCardIds(cards, playDate)
+    const target = pickDailyCard(cards, playDate, used)
+    const game = createInitialGame(target)
     set({ game })
     persistGame(payloadFromGame(game, playDate))
   },

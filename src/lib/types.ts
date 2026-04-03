@@ -42,6 +42,8 @@ export type GameState = {
 
 export type SavedGamePayload = {
   date: string
+  /** Which card this save belongs to (required when daily pick skips “used” cards). */
+  targetCardId?: string
   score: number
   guesses: string[]
   hintsUsed: number
