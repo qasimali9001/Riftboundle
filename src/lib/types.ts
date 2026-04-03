@@ -24,7 +24,7 @@ export type RevealedState = {
   letters: string[]
   /** Top-right Might value (or N/A) */
   might: boolean
-  /** Type line: supertype + card type + domains */
+  /** Supertype + card type on type line (domains still need the domain hint or win). */
   classification: boolean
 }
 

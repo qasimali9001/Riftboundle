@@ -70,7 +70,8 @@ function TypeLineBar({
       ))
     )
 
-  if (classificationRevealed) {
+  /** Full type line: card-type hint + domain hint (or legacy save where both were revealed). */
+  if (classificationRevealed && !domainsHidden) {
     const left = [card.supertype, card.cardType].filter(Boolean).join(' ')
     return (
       <div className="border-y border-zinc-600/55 bg-zinc-900/50 px-2 py-1.5 text-center transition-colors duration-500">
@@ -78,6 +79,24 @@ function TypeLineBar({
           {left ? <span className="text-zinc-200/95">{left}</span> : null}
           {left && domains.length > 0 ? <span className="text-zinc-600"> • </span> : null}
           {domainSpans('text-zinc-500')}
+        </p>
+      </div>
+    )
+  }
+
+  /** Card-type hint only: supertype + card type; domains stay masked until Reveal Domain. */
+  if (classificationRevealed && domainsHidden) {
+    const left = [card.supertype, card.cardType].filter(Boolean).join(' ')
+    return (
+      <div className="border-y border-zinc-600/55 bg-zinc-900/50 px-2 py-1.5 text-center transition-colors duration-500">
+        <p className="text-[10px] font-bold uppercase leading-snug tracking-wide">
+          {left ? <span className="text-zinc-200/95">{left}</span> : null}
+          {left && domains.length > 0 ? (
+            <>
+              <span className="text-zinc-600"> • </span>
+              <span className="text-zinc-500">? ? ?</span>
+            </>
+          ) : null}
         </p>
       </div>
     )
@@ -266,7 +285,7 @@ export function RiftboundCardFace({
   const mightRevealed = revealed.might
   const classificationRevealed = revealed.classification
 
-  const showDomainAccent = !domainsHidden || classificationRevealed
+  const showDomainAccent = !domainsHidden
 
   return (
     <div className="relative mx-auto w-full max-w-[400px]">

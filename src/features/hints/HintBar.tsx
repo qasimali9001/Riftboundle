@@ -51,7 +51,7 @@ export function HintBar() {
           className="rounded-lg border border-rift-border bg-rift-bg px-4 py-2 text-sm font-medium text-slate-200 hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
           onClick={() => hintColor()}
         >
-          Reveal domain
+          Reveal Domain
         </button>
         <button
           type="button"
@@ -67,7 +67,7 @@ export function HintBar() {
           className="rounded-lg border border-rift-border bg-rift-bg px-4 py-2 text-sm font-medium text-slate-200 hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
           onClick={() => hintClassification()}
         >
-          Reveal card type &amp; domains
+          Reveal Card Type
         </button>
       </div>
 
