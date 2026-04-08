@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { isUnitCard } from '../../lib/riftbound/cardTypes'
 import { HINT_COST } from '../../lib/config'
 import { useGameStore } from '../../store/useGameStore'
 import { LetterKeyboard } from './LetterKeyboard'
@@ -55,7 +56,12 @@ export function HintBar() {
         </button>
         <button
           type="button"
-          disabled={game.revealed.might}
+          disabled={game.revealed.might || !isUnitCard(game.targetCard)}
+          title={
+            !isUnitCard(game.targetCard)
+              ? 'Only units have Might — not used for this card'
+              : undefined
+          }
           className="rounded-lg border border-rift-border bg-rift-bg px-4 py-2 text-sm font-medium text-slate-200 hover:border-slate-500 disabled:cursor-not-allowed disabled:opacity-40"
           onClick={() => hintMight()}
         >

@@ -11,3 +11,14 @@ body {
     radial-gradient(ellipse 120% 80% at 50% -20%, rgba(59, 130, 246, 0.08), transparent),
     radial-gradient(ellipse 80% 50% at 100% 50%, rgba(180, 83, 9, 0.06), transparent);
 }
+
+/*
+ * Avoid horizontal overflow in narrow layouts (card panel, mobile).
+ * Prefer breaks at spaces; `overflow-wrap: break-word` only splits long unbroken
+ * tokens when necessary (unlike `keep-all`, which can force overflow in Latin text).
+ */
+.no-word-split {
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+}

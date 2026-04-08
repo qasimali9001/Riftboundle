@@ -1,11 +1,13 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { DateControls } from './features/archive/DateControls'
+import { PreviousGamesPage } from './features/archive/PreviousGamesPage'
 import { GamePanel } from './features/game/GamePanel'
 import { GuessInput } from './features/game/GuessInput'
 import { HintBar } from './features/hints/HintBar'
 import { useGameStore } from './store/useGameStore'
 
 export default function App() {
+  const [view, setView] = useState<'play' | 'previous'>('play')
   const loadState = useGameStore((s) => s.loadState)
   const loadError = useGameStore((s) => s.loadError)
   const loadCards = useGameStore((s) => s.loadCards)
@@ -15,7 +17,7 @@ export default function App() {
   }, [loadCards])
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-lg flex-col px-4 pb-16 pt-8 md:max-w-xl">
+    <div className="no-word-split mx-auto flex min-h-screen max-w-lg flex-col px-4 pb-16 pt-8 md:max-w-xl">
       <header className="mb-6 text-center">
         <h1 className="font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
           Riftboundle
@@ -51,14 +53,17 @@ export default function App() {
         </div>
       )}
 
-      {loadState === 'ready' && (
-        <>
-          <DateControls />
-          <GamePanel />
-          <GuessInput />
-          <HintBar />
-        </>
-      )}
+      {loadState === 'ready' &&
+        (view === 'previous' ? (
+          <PreviousGamesPage onBack={() => setView('play')} />
+        ) : (
+          <>
+            <DateControls onOpenPreviousGames={() => setView('previous')} />
+            <GamePanel />
+            <GuessInput />
+            <HintBar />
+          </>
+        ))}
 
       <footer className="mt-auto pt-12 text-center text-xs text-slate-600">
         Not affiliated with Riot Games. Fan project for fun.

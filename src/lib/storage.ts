@@ -1,7 +1,14 @@
 import type { Card, SavedGamePayload } from './types'
+import {
+  CACHE_CARDS_KEY,
+  CACHE_META_KEY,
+  KEYWORD_INDEX_KEY,
+  KEYWORD_INDEX_META_KEY,
+} from './config'
 import { dailyIndex } from './utils/seed'
 
 const PREFIX = 'riftboundle:game:'
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/
 
 export function saveKeyForDate(dateYmd: string): string {
   return `${PREFIX}${dateYmd}`
@@ -30,6 +37,39 @@ export function persistGame(payload: SavedGamePayload): void {
 export function clearSavedGame(dateYmd: string): void {
   if (typeof localStorage === 'undefined') return
   localStorage.removeItem(saveKeyForDate(dateYmd))
+}
+
+/**
+ * Dates with saved games (from localStorage), as `YYYY-MM-DD`.
+ * Newest first.
+ */
+export function listSavedGameDates(): string[] {
+  if (typeof localStorage === 'undefined') return []
+  const out: string[] = []
+  for (let i = 0; i < localStorage.length; i += 1) {
+    const key = localStorage.key(i)
+    if (!key?.startsWith(PREFIX)) continue
+    const dateYmd = key.slice(PREFIX.length)
+    if (!DATE_RE.test(dateYmd)) continue
+    out.push(dateYmd)
+  }
+  out.sort((a, b) => (a < b ? 1 : a > b ? -1 : 0))
+  return out
+}
+
+/** Clears saved games and API caches (for testing / reset). */
+export function clearAllRiftboundleData(): void {
+  if (typeof localStorage === 'undefined') return
+  const keysToRemove: string[] = []
+  for (let i = 0; i < localStorage.length; i += 1) {
+    const key = localStorage.key(i)
+    if (key?.startsWith(PREFIX)) keysToRemove.push(key)
+  }
+  for (const k of keysToRemove) localStorage.removeItem(k)
+  localStorage.removeItem(CACHE_CARDS_KEY)
+  localStorage.removeItem(CACHE_META_KEY)
+  localStorage.removeItem(KEYWORD_INDEX_KEY)
+  localStorage.removeItem(KEYWORD_INDEX_META_KEY)
 }
 
 /**

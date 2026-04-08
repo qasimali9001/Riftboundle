@@ -1,4 +1,5 @@
 import type { Card } from '../../lib/types'
+import { isGearCard, isUnitCard } from '../../lib/riftbound/cardTypes'
 import { domainRuneFilename, riftboundIconUrl } from '../../lib/riftbound/riftboundIconUrl'
 import { domainHex } from '../../lib/utils/domainColors'
 
@@ -28,17 +29,16 @@ export function CostPlate({
 }) {
   const energy = energyCostNumber(card)
   const domains = card.color
+  const showDomainCostRow = domains.length > 0 && !isGearCard(card)
 
   return (
     <div className="flex flex-col items-center gap-1 rounded-lg border border-zinc-600/60 bg-black/80 px-2 py-1.5 shadow-lg backdrop-blur-sm">
       <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-zinc-300 bg-zinc-950 text-base font-bold tabular-nums text-white">
         {energy}
       </div>
-      <div className="flex min-h-[1.25rem] flex-wrap justify-center gap-0.5">
-        {domains.length === 0 ? (
-          <span className="text-[10px] text-zinc-500">—</span>
-        ) : (
-          domains.map((d, i) => {
+      {showDomainCostRow ? (
+        <div className="flex min-h-[1.25rem] flex-wrap justify-center gap-0.5">
+          {domains.map((d, i) => {
             const fn = domainRuneFilename(d)
             const src = fn ? riftboundIconUrl(fn) : null
             return (
@@ -67,9 +67,9 @@ export function CostPlate({
                 )}
               </span>
             )
-          })
-        )}
-      </div>
+          })}
+        </div>
+      ) : null}
     </div>
   )
 }
@@ -82,6 +82,8 @@ export function MightPlate({
   card: Card
   revealed: boolean
 }) {
+  if (!isUnitCard(card)) return null
+
   const raw = String(card.manaCost ?? '').trim()
   const mightNum = parseStat(raw)
   const showDash = revealed && (raw === '—' || raw === '' || mightNum === null)

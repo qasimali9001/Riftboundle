@@ -7,8 +7,8 @@ export const WRONG_GUESS_PENALTY = 75
 /** Points lost per hint purchase */
 export const HINT_COST = 100
 
-/** Earliest selectable archive date (UTC calendar day) */
-export const ARCHIVE_MIN_DATE = '2026-01-01'
+/** Earliest selectable archive date (UTC calendar day). Game #1 anchor. */
+export const ARCHIVE_MIN_DATE = '2026-04-01'
 
 /** localStorage key prefix for card cache metadata */
 export const CACHE_META_KEY = 'riftboundle:cache-meta'

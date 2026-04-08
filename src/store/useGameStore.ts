@@ -1,7 +1,8 @@
 import Fuse from 'fuse.js'
 import { create } from 'zustand'
 import { fetchAllCards } from '../lib/api/fetchCards'
-import { HINT_COST, SCORE_START, WRONG_GUESS_PENALTY } from '../lib/config'
+import { ARCHIVE_MIN_DATE, HINT_COST, SCORE_START, WRONG_GUESS_PENALTY } from '../lib/config'
+import { isUnitCard } from '../lib/riftbound/cardTypes'
 import {
   clearSavedGame,
   collectUsedTargetCardIds,
@@ -21,6 +22,13 @@ import {
 
 function utcTodayYmd(): string {
   return new Date().toISOString().slice(0, 10)
+}
+
+function clampPlayDate(dateYmd: string): string {
+  const today = utcTodayYmd()
+  if (dateYmd < ARCHIVE_MIN_DATE) return ARCHIVE_MIN_DATE
+  if (dateYmd > today) return today
+  return dateYmd
 }
 
 function clampScore(n: number): number {
@@ -166,9 +174,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   setPlayDate: (dateYmd) => {
     const { cards } = get()
-    set({ playDate: dateYmd })
+    const d = clampPlayDate(dateYmd)
+    set({ playDate: d })
     if (cards?.length) {
-      const game = initGameForDate(cards, dateYmd)
+      const game = initGameForDate(cards, d)
       set({ game })
     }
   },
@@ -245,6 +254,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   hintMight: () => {
     const { game, playDate } = get()
     if (!game || game.isComplete || game.revealed.might) return
+    if (!isUnitCard(game.targetCard)) return
     const next: GameState = {
       ...game,
       score: scoreAfterHint(game.score),

@@ -117,7 +117,7 @@ export function InlineRuleText({
   const chunks = splitPlainUsingMaskedMatches(cleaned, masked, SECTION_BREAK_PLACEHOLDER)
 
   return (
-    <div className="whitespace-pre-wrap text-[13px] leading-relaxed text-slate-200/95">
+    <div className="min-w-0 break-words whitespace-pre-wrap text-[13px] leading-relaxed text-slate-200/95">
       {chunks.map((chunk, chunkIdx) => (
         <Fragment key={`c-${chunkIdx}`}>
           {chunkIdx > 0 && (
