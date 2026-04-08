@@ -42,7 +42,7 @@ export function DateControls({ onOpenPreviousGames }: { onOpenPreviousGames: () 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-            Daily puzzle
+            Daily Puzzle
           </p>
           <p className="mt-0.5 text-sm text-slate-300">
             <span className="font-semibold text-white">Game #{gameNumber}</span>{' '}
@@ -79,7 +79,7 @@ export function DateControls({ onOpenPreviousGames }: { onOpenPreviousGames: () 
             className="rounded-md border border-rift-accent/40 bg-rift-bg px-3 py-2 text-sm font-medium text-rift-accent hover:border-rift-accent"
             onClick={onOpenPreviousGames}
           >
-            Previous games
+            Previous Games
           </button>
         </div>
       </div>
@@ -91,7 +91,7 @@ export function DateControls({ onOpenPreviousGames }: { onOpenPreviousGames: () 
             className="rounded-md border border-rift-border bg-rift-bg px-3 py-2 text-sm text-slate-200 hover:border-slate-500"
             onClick={() => setPlayDate(today)}
           >
-            Jump to today
+            Jump to Today
           </button>
         )}
         {showReplay && (
@@ -108,7 +108,7 @@ export function DateControls({ onOpenPreviousGames }: { onOpenPreviousGames: () 
               }
             }}
           >
-            Replay (fresh)
+            Replay (Fresh)
           </button>
         )}
       </div>

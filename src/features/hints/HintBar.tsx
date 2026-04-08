@@ -32,7 +32,7 @@ export function HintBar() {
   if (!game || game.isComplete) {
     return (
       <p className="mt-6 text-center text-xs text-slate-600">
-        Next puzzle (UTC): {countdown}
+        Next Puzzle (UTC): {countdown}
       </p>
     )
   }
@@ -41,9 +41,9 @@ export function HintBar() {
     <div className="mt-8 space-y-6 rounded-xl border border-rift-border bg-rift-panel/60 p-4">
       <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
         <span>
-          Hints &amp; letter taps: up to −{HINT_COST} pts (score stops at 0; free at 0)
+          Hints &amp; Letter Taps: up to −{HINT_COST} pts (score stops at 0; free at 0)
         </span>
-        <span>Next daily reset (UTC): {countdown}</span>
+        <span>Next Daily Reset (UTC): {countdown}</span>
       </div>
       <div className="flex flex-wrap gap-2">
         <button

@@ -34,12 +34,12 @@ export function GuessInput() {
 
   return (
     <div className="relative z-10 mt-4" ref={boxRef}>
-      <label className="mb-2 block text-sm font-medium text-slate-300">Guess card</label>
+      <label className="mb-2 block text-sm font-medium text-slate-300">Guess Card</label>
       <div className="flex gap-2">
         <input
           type="text"
           autoComplete="off"
-          placeholder="Guess card…"
+          placeholder="Guess Card…"
           className="flex-1 rounded-lg border-2 border-slate-600/80 bg-[#f8fafc] px-4 py-3 text-slate-900 shadow-inner placeholder:text-slate-500 outline-none focus:border-rift-accent focus:ring-2 focus:ring-rift-accent/40"
           value={q}
           onChange={(e) => {

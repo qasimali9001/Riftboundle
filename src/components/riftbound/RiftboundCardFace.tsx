@@ -323,7 +323,7 @@ export function RiftboundCardFace({
             </div>
             <div>
               <div className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-                Card description
+                Card Description
               </div>
               <div className="text-[13px] leading-relaxed">
                 <InlineRuleText
@@ -371,7 +371,7 @@ export function RiftboundRevealedCard({
         </div>
         <div>
           <div className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-            Card description
+            Card Description
           </div>
           <div className="text-[13px] leading-relaxed">
             <InlineRuleText

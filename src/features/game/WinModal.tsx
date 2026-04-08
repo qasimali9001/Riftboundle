@@ -53,7 +53,7 @@ export function WinModal({ open, onClose, game }: WinModalProps) {
           You got it!
         </h2>
         <p className="mt-1 text-center text-sm text-slate-400">
-          Today&apos;s card revealed
+          Today&apos;s Card Revealed
         </p>
 
         <div className="mt-8 flex flex-col items-stretch gap-8 lg:flex-row lg:items-start lg:gap-10">
@@ -65,18 +65,18 @@ export function WinModal({ open, onClose, game }: WinModalProps) {
           </div>
 
           <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 rounded-xl border border-white/10 bg-black/25 p-5 sm:p-6">
-            <StatBlock label="Final score" value={String(game.score)} large />
+            <StatBlock label="Final Score" value={String(game.score)} large />
             <StatBlock
               label="Guesses"
               value={String(game.guesses.length)}
             />
             <StatBlock
-              label="Hints used"
+              label="Hints Used"
               value={String(panelHints)}
-              sub="Domain, Might, card type, keywords"
+              sub="Domain, Might, Card Type, Keywords"
             />
             <StatBlock
-              label="Letters used"
+              label="Letters Used"
               value={String(letterChecks)}
               sub="Letter keyboard taps (correct or incorrect)"
             />

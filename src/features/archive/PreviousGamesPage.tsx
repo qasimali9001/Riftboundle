@@ -60,7 +60,7 @@ export function PreviousGamesPage({ onBack }: { onBack: () => void }) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
-            Previous games
+            Previous Games
           </p>
           <p className="mt-0.5 text-sm text-slate-300">
             Selected: <span className="font-semibold text-white">Game #{gameNumber}</span>{' '}
@@ -78,11 +78,11 @@ export function PreviousGamesPage({ onBack }: { onBack: () => void }) {
           <button
             type="button"
             className="rounded-md border border-rose-900/40 bg-rose-950/20 px-3 py-2 text-sm text-rose-200 hover:border-rose-500/40"
-            title="Clears all saved scores and caches (testing)"
+            title="Removes all locally saved games and cached card data"
             onClick={() => {
               if (
                 !window.confirm(
-                  'Clear ALL saved games and cached data? This is for testing and cannot be undone.',
+                  'Clear all saved games and cached data? This cannot be undone.',
                 )
               ) {
                 return
@@ -91,10 +91,10 @@ export function PreviousGamesPage({ onBack }: { onBack: () => void }) {
               window.location.reload()
             }}
           >
-            Clear test data
+            Clear Data
           </button>
           <label className="flex items-center gap-2 text-sm text-slate-300">
-            <span className="text-xs text-slate-500">Go to date</span>
+            <span className="text-xs text-slate-500">Go to Date</span>
             <input
               type="date"
               className="rounded-md border border-rift-border bg-rift-bg px-3 py-2 text-slate-100 outline-none focus:border-rift-accent focus:ring-1 focus:ring-rift-accent"
@@ -163,7 +163,7 @@ export function PreviousGamesPage({ onBack }: { onBack: () => void }) {
               className="rounded-md border border-rift-border bg-rift-bg px-4 py-2 text-sm text-slate-200 hover:border-slate-500"
               onClick={() => setPage((p) => p + 1)}
             >
-              Load more
+              Load More
             </button>
           </div>
         )}

@@ -37,7 +37,7 @@ export default function App() {
       </header>
 
       {loadState === 'loading' && (
-        <p className="text-center text-slate-400">Loading card database…</p>
+        <p className="text-center text-slate-400">Loading Card Database…</p>
       )}
 
       {loadState === 'error' && (
